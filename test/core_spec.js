@@ -72,25 +72,24 @@ describe( 'vote', () => {
 
  it( 'creates a tally for the voted entry', () => {
   const state = Map({
-   vote: Map({ pair: List.of( 'Friday', 'Next Friday')} ),
-   entries: List()
+   pair: List.of( 'Friday', 'Next Friday' )
   })
   const nextState = vote( state, 'Friday')
   expect(nextState).to.equal( Map({
-   vote: Map({ pair: List.of( 'Friday', 'Next Friday' ), tally: Map({ 'Friday': 1 }) }),
-   entries: List()
-  }))
+   pair: List.of( 'Friday', 'Next Friday' ),
+   tally: Map({ 'Friday': 1 })
+   }))
  })
 
  it( 'adds to existing tally for the voted tally', () => {
   const state = Map({
-   vote: Map({ pair: List.of( 'Friday', 'Next Friday' ), tally: Map({ 'Friday': 3, 'Next Friday': 2 }) }),
-   entries: List()
+   pair: List.of( 'Friday', 'Next Friday' ),
+   tally: Map({ 'Friday': 3, 'Next Friday': 2 })
   })
   const nextState = vote( state, 'Friday' )
   expect(nextState).to.equal( Map({
-   vote: Map({ pair: List.of( 'Friday', 'Next Friday' ), tally: Map({ 'Friday': 4, 'Next Friday': 2}) }),
-   entries: List()
+   pair: List.of( 'Friday', 'Next Friday' ),
+   tally: Map({ 'Friday': 4, 'Next Friday': 2 })
   }))
  })
 })
