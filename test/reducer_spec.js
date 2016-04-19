@@ -4,6 +4,12 @@ import reducer from '../src/reducer.js'
 
 describe( 'reducer', () => {
 
+ it('has an initialState', () => {
+  const action = { type: 'SET_ENTRIES', entries: ['Friday']}
+  const nextState = reducer( undefined, action )
+  expect(nextState).to.equal( fromJS({ entries: ['Friday'] }) )
+ })
+
  it('handles SET_ENTRIES', () => {
   const initialState = Map()
   const action = { type: 'SET_ENTRIES', entries: ['Friday'] }
