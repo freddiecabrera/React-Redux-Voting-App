@@ -55,6 +55,17 @@ describe( 'Application logic', () => {
      entries: List.of( 'Rush Hour 2', 'Friday', 'Next Friday'  )
     }))
    })
+
+   it( 'marks a winner when just one entry is left', () => {
+    const state = Map({
+     vote: Map({ pair: List.of( 'Friday', 'Next Friday'), tally: Map({ 'Friday': 4, 'Next Friday': 2 }) }),
+     entries: List()
+    })
+    const nextState = next(state)
+    expect(nextState).to.equal( Map({
+     winner: 'Friday'
+    }))
+   })
  })
 
 describe( 'vote', () => {
