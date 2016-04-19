@@ -31,6 +31,30 @@ describe( 'Application logic', () => {
        entries: List.of('Friday After Next')
      }))
    })
+
+   it('puts winner of current vote back into entries', () => {
+    const state = Map({
+     vote: Map({ pair: List.of( 'Friday', 'Next Friday' ), tally: Map({ 'Friday': 4, 'Next Friday': 2}) }),
+     entries: List.of('Friday After Next', 'Rush Hour', 'Rush Hour 2')
+    })
+    const nextState = next(state)
+    expect(nextState).to.equal( Map({
+     vote: Map({ pair: List.of( 'Friday After Next', 'Rush Hour' ) }),
+     entries: List.of( 'Rush Hour 2', 'Friday' )
+    }))
+   })
+
+   it('puts both from tied vote back to entries', () => {
+    const state = Map({
+     vote: Map({ pair: List.of( 'Friday', 'Next Friday' ), tally: Map({ 'Friday': 3, 'Next Friday': 3 }) }),
+     entries: List.of('Friday After Next', 'Rush Hour', 'Rush Hour 2')
+    })
+    const nextState = next(state)
+    expect(nextState).to.equal( Map({
+     vote: Map({ pair: List.of( 'Friday After Next', 'Rush Hour' ) }),
+     entries: List.of( 'Rush Hour 2', 'Friday', 'Next Friday'  )
+    }))
+   })
  })
 
 describe( 'vote', () => {
@@ -58,7 +82,6 @@ describe( 'vote', () => {
    entries: List()
   }))
  })
-
 })
 
 })
